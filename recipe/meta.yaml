@@ -76,6 +76,7 @@ about:
 extra:
   recipe-maintainers:
     - MartinaWeiss
+    - conda-forge/r
 
 # The original CRAN metadata for this package was:
 
