@@ -1,7 +1,6 @@
 {% set version = '1.9.90' %}
 
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-diversity
@@ -14,8 +13,7 @@ source:
   sha256: b8f49cdbfbd82805206ad293fcb2dad65b962fb5523059a3e3aecaedf5c0ee86
 
 build:
-  merge_build_host: True  # [win]
-  number: 2
+  number: 3
 
   # This is required to make R link correctly on Linux.
   rpaths:
@@ -26,7 +24,9 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}              # [not win]
+    - {{ stdlib("c") }}                # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
+    - {{ stdlib("m2w64_c") }}          # [win]
     - {{ compiler('cxx') }}            # [not win]
     - {{ compiler('m2w64_cxx') }}      # [win]
     - {{ posix }}filesystem        # [win]
@@ -44,7 +44,6 @@ requirements:
 
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
     - r-rcpp
     - r-ggplot2
     - r-qgraph
